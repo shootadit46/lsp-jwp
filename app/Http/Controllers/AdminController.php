@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Komentar;
+use App\Models\Mading;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +15,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $mading = Mading::all();
+        return response()->json($mading);
     }
 
     public function login(Request $request)

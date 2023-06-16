@@ -12,4 +12,9 @@ class Mading extends Model
     protected $table = 'mading';
 
     protected $fillable = ['judul', 'deskripsi', 'gambar'];
+
+    public function komentars()
+    {
+      return $this->hasMany(Komentar::class, 'id_mading', 'id');
+    }
 }

@@ -24,11 +24,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('komentar')->group(function () {
   Route::post('create', [KomentarController::class, 'create']);
   Route::get('all', [KomentarController::class, 'index']);
+  Route::delete('delete/{id}', [KomentarController::class, 'destroy']);
 });
 
 Route::prefix('mading')->group(function () {
   Route::post('create', [MadingController::class, 'create']);
   Route::get('all', [MadingController::class, 'index']);
+  Route::get('find/{id}', [MadingController::class, 'show']);
+  Route::delete('delete/{id}', [MadingController::class, 'destroy']);
 });
 
 Route::prefix('admin')->group(function () {

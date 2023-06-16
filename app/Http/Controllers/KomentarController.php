@@ -83,8 +83,14 @@ class KomentarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Komentar $komentar)
+    public function destroy($id)
     {
-        //
+        $komentar = Komentar::find($id);
+        $komentar->delete();
+
+        return response()->json([
+          'message' => 'delete successfully',
+          'status' => 200
+        ]);
     }
 }
