@@ -11,5 +11,10 @@ class Komentar extends Model
 
     protected $table = 'komentar';
 
-    protected $fillable = ['id_mading', 'nama', 'email', 'komentar'];
+    protected $casts = [
+        'created_at' => 'date:Y-m-d',
+        'updated_at' => 'date:Y-m-d',
+    ];
+
+    protected $fillable = ['id_mading', 'nama', 'email', 'komentar', 'likes'];
 }

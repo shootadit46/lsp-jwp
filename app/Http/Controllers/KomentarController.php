@@ -12,13 +12,13 @@ class KomentarController extends Controller
      */
     public function index()
     {
-      $komentar = Komentar::all();
+        $komentar = Komentar::all();
 
-      return response()->json([
-        'message' => 'Get All Komentar Successfully',
-        'data' => $komentar,
-        'status' => 200
-      ]);
+        return response()->json([
+            'message' => 'Get All Komentar Successfully',
+            'data' => $komentar,
+            'status' => 200
+        ]);
     }
 
     /**
@@ -26,26 +26,27 @@ class KomentarController extends Controller
      */
     public function create(Request $request)
     {
-      $request->validate([
-        'id_mading' => 'required',
-        'nama' => 'required',
-        'email' => 'required|email',
-        'komentar' => 'required',
-      ]);
+        $request->validate([
+            'id_mading' => 'required',
+            'nama' => 'required',
+            'email' => 'required|email',
+            'komentar' => 'required',
+            'likes' => 'required',
+        ]);
 
-      $komentar = Komentar::create([
-        'id_mading' => $request->id_mading,
-        'nama' => $request->nama,
-        'email' => $request->email,
-        'komentar' => $request->komentar,
-      ]);
+        $komentar = Komentar::create([
+            'id_mading' => $request->id_mading,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'komentar' => $request->komentar,
+            'likes' => $request->likes,
+        ]);
 
-      return response()->json([
-        'message' => 'Komentar Successfully created',
-        'data' => $komentar,
-        'status' => 200,
-      ]);
-      
+        return response()->json([
+            'message' => 'Komentar Successfully created',
+            'data' => $komentar,
+            'status' => 200,
+        ]);
     }
 
     /**
@@ -83,8 +84,14 @@ class KomentarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Komentar $komentar)
+    public function destroy($id)
     {
-        //
+        $mading = Komentar::find($id);
+        $mading->delete();
+
+        return response()->json([
+            'message' => 'delete successfully',
+            'status' => 200
+        ]);
     }
 }

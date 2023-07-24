@@ -18,10 +18,10 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
-        $email = $request->input('email');
+        $username = $request->input('username');
         $password = $request->input('password');
 
-        $user = Admin::where('email', $email)->first();
+        $user = Admin::where('username', $username)->first();
         if (!$user) {
             return response()->json([
                 'status' => 400,
@@ -29,7 +29,7 @@ class AdminController extends Controller
                 'data' => ''
             ]);
         }
-  
+
         $isValidPassword = Hash::check($password, $user->password);
         if (!$isValidPassword) {
             return response()->json([
@@ -52,20 +52,20 @@ class AdminController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-          'email' => 'required|email',
-          'username' => 'required',
-          'password' => 'required',
+            'email' => 'required|email',
+            'username' => 'required',
+            'password' => 'required',
         ]);
 
         $admin = Admin::create([
-          'email' => $request->email,
-          'username' => $request->username,
-          'password' => Hash::make($request->password),
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
         ]);
 
         return response()->json([
-          'message' => 'Create Admin Successfully',
-          'status' => 200
+            'message' => 'Create Admin Successfully',
+            'status' => 200
         ]);
     }
 
